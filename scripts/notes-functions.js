@@ -90,15 +90,27 @@ const sortNotes = (notes, sortBy) => {
 
 // Render Application Notes
 const renderNotes = (notes, filters) => {
+    const notesEl = document.querySelector('#notes')
     notes = sortNotes(notes, filters.sortBy)
     const filteredNotes = notes.filter( (note) => {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
 
-    document.querySelector('#notes').innerHTML = ''
+    notesEl.innerHTML = ''
 
-    filteredNotes.forEach( (note) => {
-        const noteEl = generateNoteDom(note)
-        document.querySelector('#notes').appendChild(noteEl)
-    })
+    if (filteredNotes.length > 0) {
+        filteredNotes.forEach((note) => {
+            const noteEl = generateNoteDom(note)
+            notesEl.appendChild(noteEl)
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No notes to show'
+        notesEl.appendChild(emptyMessage)
+    }
+}
+
+//Generate Last Edited message
+const generateLastEdited = (timestamp) => {
+    return `Last edited ${moment(timestamp).fromNow()}`
 }
