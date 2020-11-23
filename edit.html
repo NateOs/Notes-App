@@ -15,13 +15,14 @@
             <div class="actions__container actions__container--spaced">
                 <a href="/index.html">Home</a>
                 <span id="last-edited"></span>
-                
             </div>
         </div>
+        <div class="container">
+            <input id="note-title" class="title-input" placeholder="Note title"> 
+            <textarea id="note-body" class="body-input" placeholder="Enter note here"></textarea> 
+            <button id="remove-note" class="button button--secondary">Remove Note</button>    
         </div>
-        <input id="note-title" placeholder="Note title"> 
-        <textarea id="note-body" placeholder="Enter note here"></textarea> 
-        <button id="remove-note">Remove Note</button>
+        </div>
         <script src="moment.js"></script>
         <script>
             moment().format();
