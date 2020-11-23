@@ -26,9 +26,10 @@ const removeNote =  (id) => {
 
 //Generate NoteDOM
 const generateNoteDom = (note) => {
-    const noteEl = document.createElement('p')
-    const textEl = document.createElement('a')
+    const noteEl = document.createElement('a')
+    const textEl = document.createElement('p')
     const button = document.createElement('button')
+    const statusEl = document.createElement('p')
 
     //setup the remove notes button
     button.textContent = 'x'
@@ -47,7 +48,18 @@ const generateNoteDom = (note) => {
         textEl.textContent = 'Unnamed note'
     }
     textEl.setAttribute('href', `/edit.html#${note.id}`)
+    textEl.classList.add('list-item__title')
     noteEl.appendChild(textEl)
+
+    //Setup the link
+    noteEl.setAttribute('href', `/edit.html#${note.id}`)
+    noteEl.classList.add('list-item')
+
+    //Setup the status message  
+    statusEl.textContent = generateLastEdited(note.updatedAt)
+    statusEl.classList.add('list-item__subtitle')
+    noteEl.appendChild(statusEl)
+
     return noteEl
 }
 
@@ -106,6 +118,7 @@ const renderNotes = (notes, filters) => {
     } else {
         const emptyMessage = document.createElement('p')
         emptyMessage.textContent = 'No notes to show'
+        emptyMessage.classList.add('empty-message')
         notesEl.appendChild(emptyMessage)
     }
 }
